@@ -2,7 +2,6 @@ package com.cromewell.financediary.utils;
 
 
 import com.cromewell.financediary.Account;
-import com.cromewell.financediary.Window;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.BufferedReader;
@@ -78,6 +77,7 @@ public class Utils {
                 line = reader.readLine();
             } catch (IOException e) {
                 System.out.println("Error while reading from file "+src.getName());
+                System.exit(1);
             }
             acc.setMoneyProperty(getSumFromString(line));
         }
@@ -92,6 +92,7 @@ public class Utils {
             return Integer.parseInt(line);
         }catch (NumberFormatException nfe){
             System.out.println("Error while converting filedata to int.  "+line);
+            System.exit(1);
         }
         return 0;
     }
