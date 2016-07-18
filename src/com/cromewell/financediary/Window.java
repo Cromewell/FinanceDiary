@@ -5,11 +5,11 @@ import com.cromewell.financediary.utils.Utils;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import java.util.Arrays;
 
 
 
@@ -44,8 +44,8 @@ public class Window extends Application{
 
         TextField change = new TextField();
         change.setPrefSize(200, 60);
-        change.setOnKeyTyped(event -> {
-            if(Arrays.toString(event.getCharacter().getBytes()).equals("[13]")){ //if return was typed
+        change.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){ //if return was typed
                 String text = change.getText();
                 acc.addSum(Utils.stringToInt(text)); //account money += sum
             }

@@ -2,6 +2,7 @@ package com.cromewell.financediary.utils;
 
 
 import com.cromewell.financediary.Account;
+import com.cromewell.financediary.Window;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.BufferedReader;
@@ -31,7 +32,6 @@ public class Utils {
         int number = 0;
         try {
             number = Integer.parseInt(textTokens[0]);
-            System.out.println("Y");
         }catch(NumberFormatException nfe){
             System.out.println("Only numbers.");
         }
