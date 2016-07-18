@@ -1,6 +1,6 @@
 package com.cromewell.financediary;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Created by Jo on 11.07.2016.
@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Account {
 
     private String name;
-    private SimpleStringProperty moneyProperty = new SimpleStringProperty();
+    private SimpleIntegerProperty moneyProperty = new SimpleIntegerProperty();
 
     /**
      *
@@ -18,7 +18,7 @@ public class Account {
      */
 
     Account(int money, String name) {
-        this.moneyProperty.set(String.valueOf(money));
+        this.moneyProperty.set(money);
         this.name = name;
     }
 
@@ -27,21 +27,21 @@ public class Account {
      * @param sum    is the int which will be added to the money
      */
     public void addSum(int sum){
-        moneyProperty.set(String .valueOf(Integer.parseInt(moneyProperty.get())+sum));
+        moneyProperty.set(moneyProperty.get()+sum);
     }
 
     //GETTERS AND SETTER BELOW//
 
-    public String getMoneyProperty() {
+    public int getMoneyProperty() {
         return moneyProperty.get();
     }
 
-    public SimpleStringProperty moneyPropertyProperty() {
+    public SimpleIntegerProperty moneyPropertyProperty() {
         return moneyProperty;
     }
 
     public void setMoneyProperty(int moneyProperty) {
-        this.moneyProperty.set(String.valueOf(moneyProperty));
+        this.moneyProperty.set(moneyProperty);
     }
 
     public String getName() {

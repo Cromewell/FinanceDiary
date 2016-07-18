@@ -40,7 +40,7 @@ public class Window extends Application{
 
         Label money = new Label("0");
         money.setFont(new Font("Arial", 64));
-        money.textProperty().bind(acc.moneyPropertyProperty());
+        money.textProperty().bind(acc.moneyPropertyProperty().asString());
 
         TextField change = new TextField();
         change.setPrefSize(200, 60);
@@ -56,11 +56,11 @@ public class Window extends Application{
         MenuItem newAccount = new MenuItem("create new Acc");
         newAccount.setOnAction(event -> {
             acc = new Account(0, NamePopup.getName()); //popup where the user enters his name
-            money.textProperty().bind(acc.moneyPropertyProperty()); //binds the label to the money
+            money.textProperty().bind(acc.moneyPropertyProperty().asString()); //binds the label to the money
             System.out.println(acc.getName()+" has been created");
         });
         MenuItem saveAccount = new MenuItem("save Acc");
-        saveAccount.setOnAction(event -> Utils.saveToFile(acc)); //writes the data to a file, choosen by the user
+        saveAccount.setOnAction(event -> Utils.saveToFile(acc)); //writes the data to a file, chosen by the user
 
         MenuItem loadAccount = new MenuItem("load Acc");
         loadAccount.setOnAction(event -> Utils.loadFromFile(acc));

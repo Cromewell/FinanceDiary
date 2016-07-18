@@ -4,14 +4,8 @@ package com.cromewell.financediary.utils;
 import com.cromewell.financediary.Account;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by Jo on 11.07.2016.
@@ -41,7 +35,7 @@ public class Utils {
      *
      * @param acc       The used account
      */
-    public static void saveToFile(Account acc) {
+    public static void saveToFile(Account acc){
         FileChooser save = new FileChooser();
         if(jarLocation != null) {
             save.setInitialDirectory(jarLocation.getParentFile());
@@ -50,10 +44,11 @@ public class Utils {
         //save.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data", "*.txt"));//
         File destination = save.showSaveDialog(new Stage()); //file  used to write in the data
         if(destination!= null){
-            byte[] data = acc.getMoneyProperty().getBytes();
-            Path path = Paths.get(destination.toURI());
-            try {
-                Files.write(path, data);
+            try{
+                BufferedWriter writer = new BufferedWriter(new FileWriter(destination));
+                writer.write(String.valueOf(acc.getMoneyProperty()));
+                writer.flush();
+                writer.close();
             } catch (IOException e) {
                 System.out.println("Error while saving to file "+destination.getName());
             }
@@ -64,7 +59,7 @@ public class Utils {
      *
      * @param acc       The used account
      */
-    public static void loadFromFile(Account acc) {
+    public static void loadFromFile(Account acc){
         FileChooser load = new FileChooser();
         if(jarLocation != null) {
             load.setInitialDirectory(jarLocation.getParentFile());
@@ -75,6 +70,7 @@ public class Utils {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(src));
                 line = reader.readLine();
+                reader.close();
             } catch (IOException e) {
                 System.out.println("Error while reading from file "+src.getName());
                 System.exit(1);
